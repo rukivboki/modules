@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .check {
+        font-size: 24px;
+    }
+
+    .easy {
+        color: red;
+    }
+
+    .normal {
+        color: orange;
+    }
+
+    .strong {
+        color: green;
+    }
+</style>
+
+<body>
+    <input class="input" placeholder="Введите пароль">
+    <p class="check"></p>
+    <script src="node_modules/check-password-strength/index.js"></script>
+    <script>
+        const password = document.querySelector('.input');
+        const check = document.querySelector('.check');
+        password.addEventListener('input', (e) => {
+            check.textContent = passwordStrength(e.target.value).value
+            if (check.textContent === 'Слишком слабый' || check.textContent === 'Слабый') {
+                check.classList.remove('strong');
+                check.classList.remove('normal');
+                check.classList.add('easy');
+            }
+            if (check.textContent === 'Нормальный') {
+                check.classList.remove('easy');
+                check.classList.remove('strong');
+                check.classList.add('normal');
+            }
+            if (check.textContent === 'Надежный') {
+                check.classList.remove('normal');
+                check.classList.remove('easy');
+                check.classList.add('strong');
+            }
+        })
+    </script>
+</body>
+
+</html>
